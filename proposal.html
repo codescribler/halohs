@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Turning 5-Star Reviews Into Booked Appointments | Halo Hearing Solutions</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F4C4;</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #0C8577;
+      --primary-light: #E4F3F0;
+      --primary-dark: #065C54;
+      --accent: #C4873E;
+      --accent-light: #FEF7EE;
+      --accent-glow: rgba(196,135,62,0.2);
+      --dark: #161B1A;
+      --dark-card: #1A2422;
+      --bg: #FAF8F5;
+      --white: #FFFFFF;
+      --text: #3A3F3D;
+      --text-2: #6B716F;
+      --text-muted: #8E9391;
+      --border: #E5E2DC;
+      --border-light: #EFECEA;
+      --font-heading: 'Lora', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============ STICKY HEADER ============ */
+    .prop-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250,248,245,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      height: 64px;
+    }
+    .prop-header.scrolled {
+      border-bottom-color: var(--border);
+      box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+    }
+    .prop-header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .prop-header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .prop-header-logo img {
+      height: 36px;
+      width: auto;
+    }
+    .prop-header-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .prop-header-back:hover { color: var(--primary); }
+    .prop-header-back svg { width: 14px; height: 14px; }
+
+    .prop-header-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .prop-header-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .prop-header-cta svg { width: 14px; height: 14px; }
+
+    /* ============ LAYOUT ============ */
+    .prop-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 96px 32px 64px;
+      gap: 48px;
+    }
+
+    /* ============ TOC SIDEBAR ============ */
+    .prop-toc {
+      position: sticky;
+      top: 96px;
+      align-self: start;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+    .prop-toc-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .prop-toc-list {
+      list-style: none;
+    }
+    .prop-toc-list li {
+      margin-bottom: 2px;
+    }
+    .prop-toc-list a {
+      display: block;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+      transition: all 0.2s;
+    }
+    .prop-toc-list a:hover {
+      color: var(--text);
+      background: rgba(12,133,119,0.04);
+    }
+    .prop-toc-list a.active {
+      color: var(--primary);
+      font-weight: 600;
+      border-left-color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    /* ============ CONTENT COLUMN ============ */
+    .prop-content {
+      max-width: 760px;
+    }
+
+    /* Title block */
+    .prop-title-block {
+      padding-bottom: 40px;
+      margin-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .prop-title {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+    .prop-title .client-name {
+      color: var(--primary);
+    }
+    .prop-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--text-2);
+    }
+    .prop-meta dt {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .prop-meta dd {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* ============ SECTIONS ============ */
+    .prop-section {
+      padding-top: 8px;
+      margin-bottom: 16px;
+      scroll-margin-top: 96px;
+    }
+    .section-num {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .prop-section h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--dark);
+      margin-bottom: 8px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    .prop-section h3 {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+    .prop-section h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--dark);
+      margin-top: 24px;
+      margin-bottom: 8px;
+    }
+    .prop-section p {
+      margin-bottom: 16px;
+    }
+    .prop-section ul, .prop-section ol {
+      margin-bottom: 16px;
+      padding-left: 0;
+      list-style: none;
+    }
+    .prop-section li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 8px;
+    }
+    .prop-section li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      background: var(--primary);
+      border-radius: 50%;
+    }
+
+    /* HR between sections */
+    .prop-hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, var(--primary-light), transparent);
+      margin: 40px 0;
+    }
+
+    /* ============ CALLOUT ============ */
+    .callout {
+      border-left: 3px solid var(--primary);
+      background: var(--primary-light);
+      padding: 20px 24px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin: 24px 0;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ============ IMAGES ============ */
+    .prop-image {
+      margin: 28px 0;
+      text-align: center;
+    }
+    .prop-image img {
+      width: 100%;
+      max-width: 100%;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    }
+    .prop-image figcaption {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 10px;
+    }
+
+    /* ============ TABLES ============ */
+    .prop-table-wrap {
+      margin: 24px 0;
+      overflow-x: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .prop-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+    .prop-table thead {
+      background: var(--bg);
+    }
+    .prop-table th {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .prop-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: top;
+    }
+    .prop-table tbody tr:last-child td { border-bottom: none; }
+    .prop-table tbody tr:hover { background: rgba(12,133,119,0.02); }
+
+    /* Highlighted / recommended column */
+    .prop-table th.recommended {
+      background: var(--primary);
+      color: #fff;
+    }
+    .prop-table td.recommended {
+      background: var(--primary-light);
+    }
+
+    /* KV table */
+    .kv-table {
+      margin: 24px 0;
+    }
+    .kv-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 15px;
+    }
+    .kv-row:last-child { border-bottom: none; }
+    .kv-label { font-weight: 600; color: var(--dark); }
+    .kv-value { color: var(--text-2); text-align: right; }
+
+    /* ============ CTA FOOTER BLOCK ============ */
+    .prop-cta-block {
+      background: var(--dark);
+      border-radius: var(--radius);
+      padding: 56px 40px;
+      text-align: center;
+      margin-top: 48px;
+      color: #fff;
+    }
+    .prop-cta-block h2 {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      border: none;
+      color: #fff;
+      margin-bottom: 8px;
+      padding-bottom: 0;
+    }
+    .prop-cta-block .subtitle {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+    .prop-cta-contacts {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .prop-cta-contacts a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .prop-cta-contacts a:hover { color: #fff; }
+    .prop-cta-contacts svg { width: 16px; height: 16px; }
+    .prop-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 36px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 8px 32px var(--accent-glow);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .prop-cta-btn:hover { background: #AE7533; transform: translateY(-2px); }
+
+    /* ============ SITE FOOTER ============ */
+    .prop-footer {
+      text-align: center;
+      padding: 40px 32px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .prop-footer-logo {
+      margin-bottom: 8px;
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 960px) {
+      .prop-toc { display: none; }
+      .prop-layout {
+        grid-template-columns: 1fr;
+        padding: 80px 24px 48px;
+        gap: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .prop-header-inner { padding: 0 16px; }
+      .prop-header-back span { display: none; }
+      .prop-layout { padding: 76px 16px 32px; }
+      .prop-title { font-size: 28px; }
+      .prop-meta { gap: 20px; }
+      .prop-cta-block { padding: 40px 24px; }
+      .prop-table { font-size: 14px; }
+      .prop-table th, .prop-table td { padding: 10px 12px; }
+      .kv-row { flex-direction: column; gap: 2px; }
+      .kv-value { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ STICKY HEADER ============ -->
+  <header class="prop-header" id="propHeader">
+    <div class="prop-header-inner">
+      <div class="prop-header-left">
+        <a href="index.html" class="prop-header-logo">
+          <img src="images/logo.png" alt="Halo Hearing Solutions">
+        </a>
+        <a href="index.html" class="prop-header-back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>Back to overview</span>
+        </a>
+      </div>
+      <a href="mailto:daniel@dreamfree.co.uk?subject=Halo%20Hearing%20Solutions%20Website%20Proposal" class="prop-header-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Get in Touch
+      </a>
+    </div>
+  </header>
+
+  <!-- ============ MAIN LAYOUT ============ -->
+  <div class="prop-layout">
+
+    <!-- TOC Sidebar -->
+    <aside class="prop-toc">
+      <div class="prop-toc-label">Contents</div>
+      <ol class="prop-toc-list">
+        <li><a href="#s01" class="active">01 &mdash; Executive Summary</a></li>
+        <li><a href="#s02">02 &mdash; What We Found</a></li>
+        <li><a href="#s03">03 &mdash; What We're Proposing</a></li>
+        <li><a href="#s04">04 &mdash; Design Preview</a></li>
+        <li><a href="#s05">05 &mdash; What This Means</a></li>
+        <li><a href="#s06">06 &mdash; Why DreamFree</a></li>
+        <li><a href="#s07">07 &mdash; Your Investment</a></li>
+        <li><a href="#s08">08 &mdash; Timeline &amp; Next Steps</a></li>
+      </ol>
+    </aside>
+
+    <!-- Content Column -->
+    <main class="prop-content">
+
+      <!-- Title Block -->
+      <div class="prop-title-block">
+        <h1 class="prop-title">
+          Turning 5-Star Reviews Into<br>
+          <span class="client-name">Booked Appointments</span>
+        </h1>
+        <dl class="prop-meta">
+          <div>
+            <dt>Prepared for</dt>
+            <dd>Halo Hearing Solutions</dd>
+          </div>
+          <div>
+            <dt>Prepared by</dt>
+            <dd>Daniel, DreamFree</dd>
+          </div>
+          <div>
+            <dt>Date</dt>
+            <dd>6 March 2026</dd>
+          </div>
+          <div>
+            <dt>Valid until</dt>
+            <dd>5 April 2026</dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- ========== SECTION 01 ========== -->
+      <section class="prop-section" id="s01">
+        <span class="section-num">01</span>
+        <h2>Executive Summary</h2>
+        <p><strong>The situation:</strong> Halo Hearing Solutions has a 5.0-star Google rating across 85+ reviews, three Hertfordshire clinics, and a reputation for genuinely personal care. You&rsquo;re one of the best-reviewed audiology practices in the area.</p>
+        <p><strong>The challenge:</strong> Your website doesn&rsquo;t reflect any of that. Visitors can&rsquo;t easily read the text, the homepage slideshow is actively reducing bookings, and your 5-star reviews are buried. Every month the current site stays live, potential patients are finding competitors with clearer, more trustworthy online presences instead. Even a handful of missed ear wax removal bookings per month &mdash; at &pound;85 each &mdash; adds up to thousands in lost revenue over a year.</p>
+        <p><strong>The solution:</strong> We&rsquo;ve already built the answer. <a href="demo.html" style="color: var(--primary); font-weight: 600;">A complete, working six-page website</a> that puts your reviews, HCPC credentials, and booking buttons front and centre on every device. It loads in under 2 seconds, is structured so Google can showcase your star rating in search results, and makes booking one tap away on mobile.</p>
+        <p><strong>The outcome:</strong> A website that matches the quality of your in-clinic experience. More visitors finding you on Google. More of those visitors booking. A site you&rsquo;re genuinely proud to send people to.</p>
+        <p><strong>The investment:</strong> &pound;1,500 one-off build fee (split 50/50 across kickoff and launch), plus a monthly plan from &pound;79/month for hosting, backups, and ongoing support. At just 2 extra wax removal bookings per month, the build fee pays for itself in under 9 months &mdash; and the monthly plan costs less than a single appointment.</p>
+
+        <div class="callout">
+          <strong>Our recommendation:</strong> Let&rsquo;s schedule a 15-minute call this week so I can walk you through the demo on a screen share and answer any questions. You can reach me directly on <a href="tel:07786556885" style="color: var(--primary);">07786 556885</a> or <a href="mailto:daniel@dreamfree.co.uk" style="color: var(--primary);">daniel@dreamfree.co.uk</a>.
+        </div>
+      </section>
+      <hr class="prop-hr">
+
+      <!-- ========== SECTION 02 ========== -->
+      <section class="prop-section" id="s02">
+        <span class="section-num">02</span>
+        <h2>What We Found</h2>
+        <p>We spent time reviewing your current website, your Google Business Profiles, and how you compare to other hearing care providers in Hertfordshire. Here&rsquo;s what stood out:</p>
+        <p>Your reputation is exceptional &mdash; 5.0 stars, patients praising the personal care, the warmth, the honesty. That&rsquo;s rare, and it&rsquo;s genuinely your strongest competitive advantage. But your website isn&rsquo;t telling that story. When a potential patient lands on your site, this is what they experience:</p>
+        <ul>
+          <li><strong>Hard-to-read text in key areas</strong> &mdash; when someone first arrives, some of the text blends into the background. If a visitor can&rsquo;t instantly read what you do and how to book, they leave
+            <figure class="prop-image" style="margin-top: 16px;">
+              <img src="proposal/old-homepage-bad-text.jpg" alt="Current Halo Hearing Solutions homepage showing low-contrast text over a busy background image">
+              <figcaption>Your current homepage &mdash; the headline and description text is difficult to read against the background image</figcaption>
+            </figure>
+          </li>
+          <li><strong>The homepage slideshow is losing you bookings</strong> &mdash; the rotating banner at the top looks polished, but study after study shows that slideshows actively reduce the number of people who take action. Most visitors never see past the first slide, and the movement draws attention away from your booking buttons and phone numbers</li>
+          <li><strong>Dated visual design</strong> &mdash; doesn&rsquo;t reflect the premium quality of your in-clinic experience</li>
+          <li><strong>Slow to load</strong> &mdash; heavy plugins and large images mean visitors are left waiting, and some won&rsquo;t</li>
+          <li><strong>Doesn&rsquo;t work well on phones</strong> &mdash; many elements don&rsquo;t adapt to smaller screens, yet this is how most patients will find you</li>
+          <li><strong>Booking buttons aren&rsquo;t prominent enough</strong> &mdash; visitors have to scroll and search to find how to contact you or book an appointment</li>
+          <li><strong>Google can&rsquo;t showcase you properly</strong> &mdash; the site is missing the behind-the-scenes information that helps Google display your star rating, location, and services in search results</li>
+          <li><strong>Your 5-star reviews are hidden</strong> &mdash; your reviews are your strongest asset, yet a new visitor won&rsquo;t see them unless they go looking</li>
+        </ul>
+        <p>The gap between your online presence and your real-world reputation is the opportunity here. People searching &ldquo;ear wax removal near me&rdquo; or &ldquo;hearing test Berkhamsted&rdquo; need to land on a site that immediately builds trust and makes booking effortless. Right now, some of those people are choosing a competitor with a better website &mdash; not a better service.</p>
+      </section>
+      <hr class="prop-hr">
+
+      <!-- ========== SECTION 03 ========== -->
+      <section class="prop-section" id="s03">
+        <span class="section-num">03</span>
+        <h2>What We're Proposing</h2>
+        <p>A complete, ground-up website redesign built around three priorities:</p>
+
+        <h3>1. Trust at First Glance</h3>
+        <p>Every page leads with your strongest assets: your 5-star rating, HCPC registration, and the warmth of your patient reviews. Visitors should feel the quality of your practice within 3 seconds of landing.</p>
+
+        <h3>2. Effortless Booking</h3>
+        <p>&ldquo;Book Now&rdquo; and phone buttons visible on every page, on every device. On mobile, booking and call buttons stay pinned to the bottom of the screen so they&rsquo;re always one tap away. We remove every possible barrier between &ldquo;I need help&rdquo; and &ldquo;I&rsquo;ve booked.&rdquo;</p>
+
+        <h3>3. Premium Feel, Personal Warmth</h3>
+        <p>Your signature teal is the foundation, paired with warm cream tones and a subtle gold accent for a premium feel. The typography is chosen for elegance and readability &mdash; especially for your audience. Plenty of breathing room, smooth transitions, and photography that feels genuinely human.</p>
+
+        <h4>Six Pages, Fully Designed</h4>
+        <ul>
+          <li><strong>Home</strong> &mdash; strong first impression with your headline, trust signals, services, patient reviews, and locations</li>
+          <li><strong>Ear Wax Removal</strong> &mdash; clear pricing, what to expect at the appointment, and frequently asked questions</li>
+          <li><strong>Hearing Loss &amp; Hearing Aids</strong> &mdash; reassuring, educational content that helps patients understand their options</li>
+          <li><strong>About Us</strong> &mdash; your story, values, team, and HCPC credentials</li>
+          <li><strong>Reviews</strong> &mdash; your best patient testimonials, organised by service and location</li>
+          <li><strong>Contact</strong> &mdash; enquiry form, all three locations with maps, and opening hours</li>
+        </ul>
+      </section>
+      <hr class="prop-hr">
+
+      <!-- ========== SECTION 04 ========== -->
+      <section class="prop-section" id="s04">
+        <span class="section-num">04</span>
+        <h2>Design Preview</h2>
+        <p>We&rsquo;ve built a fully working demo so you can see exactly what the finished site will look and feel like &mdash; on your phone, tablet, or desktop.</p>
+
+        <figure class="prop-image">
+          <img src="proposal/new homepage.jpg" alt="Proposed new Halo Hearing Solutions homepage with clear headline, booking buttons, and trust signals">
+          <figcaption>The new homepage &mdash; clear headline, prominent booking buttons, and your trust signals visible immediately</figcaption>
+        </figure>
+
+        <div class="callout">
+          <a href="demo.html" style="color: var(--primary); font-weight: 600;">Launch the interactive demo &rarr;</a> to explore all six pages on any device.
+        </div>
+
+        <h3>Design Highlights</h3>
+        <ul>
+          <li><strong>Striking first impression</strong> &mdash; full-width photography with a clear headline and two booking buttons front and centre</li>
+          <li><strong>Instant credibility</strong> &mdash; your 5-star rating, HCPC badge, and three locations displayed immediately</li>
+          <li><strong>Patient reviews</strong> &mdash; swipeable testimonials that rotate automatically, showing which clinic each review is from</li>
+          <li><strong>Clear service navigation</strong> &mdash; each service presented with its own icon and a direct link to learn more</li>
+          <li><strong>Your numbers at a glance</strong> &mdash; animated stats (rating, reviews, clinics, experience) for immediate impact</li>
+          <li><strong>All three locations</strong> &mdash; phone, address, and hours visible without scrolling through the whole page</li>
+          <li><strong>Always-visible booking on mobile</strong> &mdash; &ldquo;Book Now&rdquo; and &ldquo;Call Us&rdquo; buttons pinned to the bottom of the screen</li>
+          <li><strong>Common questions answered</strong> &mdash; expandable FAQ sections so patients find answers without having to call</li>
+        </ul>
+
+        <p>The site is also built with accessibility in mind &mdash; easy to read, easy to navigate with a keyboard, and comfortable for visitors who are sensitive to motion.</p>
+      </section>
+      <hr class="prop-hr">
+
+      <!-- ========== SECTION 05 ========== -->
+      <section class="prop-section" id="s05">
+        <span class="section-num">05</span>
+        <h2>What This Means for Your Practice</h2>
+
+        <h3>Patients Won&rsquo;t Wait &mdash; and They Won&rsquo;t Have To</h3>
+        <p>Your current site takes several seconds to load. The new site loads in under 2 seconds. That matters because research shows that over half of mobile visitors leave a site that takes more than 3 seconds to appear. Faster loading means fewer people giving up before they even see your services.</p>
+
+        <h3>More Patients Finding You on Google</h3>
+        <p>Each service gets its own page, targeting the exact searches your patients are making &mdash; &ldquo;ear wax removal Berkhamsted&rdquo;, &ldquo;hearing test near me&rdquo;, &ldquo;audiologist Chorleywood&rdquo;. Behind the scenes, we include the data Google needs to display your star rating, address, and opening hours directly in search results &mdash; making your listing stand out before anyone even clicks through.</p>
+
+        <h3>More Visitors Actually Booking</h3>
+        <p>Every design decision is made with one question in mind: does this make it easier for someone to book? Phone numbers are tappable on mobile. Booking buttons appear throughout the site and stay pinned to the screen on phones. Your best reviews appear at the moments when a visitor is deciding whether to take the next step. The result: a higher proportion of visitors become booked patients.</p>
+
+        <h3>A Site That Works for All Your Patients</h3>
+        <p>Many of your patients are older or may have additional needs. The site is designed to be easy to read, easy to navigate, and comfortable for everyone &mdash; including visitors using screen readers, keyboards, or those who find screen animations uncomfortable. No one is excluded.</p>
+      </section>
+      <hr class="prop-hr">
+
+      <!-- ========== SECTION 06 ========== -->
+      <section class="prop-section" id="s06">
+        <span class="section-num">06</span>
+        <h2>Why DreamFree</h2>
+        <p>We don&rsquo;t send mockups and wait for feedback. We build your actual website &mdash; with your real content, your branding, and your services &mdash; so you can see exactly what you&rsquo;re getting before you commit to anything.</p>
+        <p>That&rsquo;s the demo you&rsquo;ve already seen. Most agencies won&rsquo;t do that. We think it&rsquo;s the only honest way to work.</p>
+        <p>We specialise in helping independent, service-based businesses like yours get noticed online and turn that attention into real bookings. We handle everything &mdash; design, development, hosting, and ongoing support &mdash; so you can focus on your patients.</p>
+
+        <h3>How We Compare</h3>
+        <p>You have a few options for a new website. Here&rsquo;s how they stack up:</p>
+        <ul>
+          <li><strong>DIY website builders (Squarespace, Wix)</strong> &mdash; cheaper upfront, but you&rsquo;re on your own. No one is structuring your site so Google shows your star rating. No one is designing for your specific audience (often 60+, often on a phone). No one is optimising the layout to turn visitors into bookings. And when something breaks at 9pm on a Tuesday, there&rsquo;s no one to call.</li>
+          <li><strong>A larger agency</strong> &mdash; they&rsquo;ll show you a template and ask you to imagine the rest. You won&rsquo;t see what you&rsquo;re actually getting until after you&rsquo;ve signed a contract. With us, you&rsquo;ve already seen the finished product &mdash; and you haven&rsquo;t spent a penny.</li>
+          <li><strong>Keeping the current site</strong> &mdash; the most expensive option of all, because every month it stays live, you&rsquo;re losing potential patients to competitors with better online presences. The cost isn&rsquo;t on an invoice &mdash; it&rsquo;s in the bookings that never happen.</li>
+        </ul>
+
+        <div class="callout">
+          &ldquo;Without DreamFree, my company wouldn&rsquo;t be where it is today. Daniel&rsquo;s broad knowledge of business setup, web design and marketing helped focus my business on what&rsquo;s important. He&rsquo;s been a pleasure to work with and I&rsquo;d highly recommend DreamFree for anyone wishing to give their business the extra boost it needs to be noticed!&rdquo;<br><br>
+          <strong>&mdash; Brent, Owner of Renovation Planner</strong>
+        </div>
+      </section>
+      <hr class="prop-hr">
+
+      <!-- ========== SECTION 07 ========== -->
+      <section class="prop-section" id="s07">
+        <span class="section-num">07</span>
+        <h2>Your Investment</h2>
+
+        <h3>Putting the Numbers in Context</h3>
+        <p>A single ear wax removal appointment brings in &pound;85. A hearing aid fitting is worth significantly more. If your new website generates just 2 additional wax removal bookings per month &mdash; a conservative estimate given the improvements to visibility, mobile experience, and booking flow &mdash; that&rsquo;s &pound;2,040 per year in additional revenue. The build fee pays for itself in under 9 months, and the monthly plan costs less than a single appointment.</p>
+
+        <h3>What the Build Fee Covers</h3>
+        <p>The demo you&rsquo;ve seen is built around publicly available information &mdash; it shows you what&rsquo;s possible. The build phase is where we turn it into <em>your</em> production website: your final content and wording, professional photography, working form integrations, visitor tracking, search engine configuration, device testing, and everything set up on hosting that we manage for you. The demo shows the destination; the build gets you there.</p>
+
+        <h3>Two Options</h3>
+        <p>Both options include the complete six-page website. The difference is in how much ongoing support you&rsquo;d like.</p>
+
+        <!-- Comparison table -->
+        <div class="prop-table-wrap">
+          <table class="prop-table">
+            <thead>
+              <tr>
+                <th style="width:46%;">What&rsquo;s included</th>
+                <th>Launch</th>
+                <th class="recommended">Launch + Grow</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>6-page website (all devices)</td>
+                <td>Included</td>
+                <td class="recommended">Included</td>
+              </tr>
+              <tr>
+                <td>Search engine setup (Google rich results)</td>
+                <td>Included</td>
+                <td class="recommended">Included</td>
+              </tr>
+              <tr>
+                <td>Contact form &amp; visitor tracking</td>
+                <td>Included</td>
+                <td class="recommended">Included</td>
+              </tr>
+              <tr>
+                <td>Content revisions before launch</td>
+                <td>2 rounds</td>
+                <td class="recommended">3 rounds</td>
+              </tr>
+              <tr>
+                <td>Hosting, security &amp; daily backups</td>
+                <td>Included</td>
+                <td class="recommended">Included</td>
+              </tr>
+              <tr>
+                <td>Downtime recovery</td>
+                <td>Included</td>
+                <td class="recommended">Included</td>
+              </tr>
+              <tr>
+                <td>Mini projects per month (under 30 min each)</td>
+                <td>2</td>
+                <td class="recommended">4</td>
+              </tr>
+              <tr>
+                <td>Google Business Profile review &amp; optimisation</td>
+                <td>&mdash;</td>
+                <td class="recommended">Included</td>
+              </tr>
+              <tr>
+                <td>Quarterly booking performance review</td>
+                <td>&mdash;</td>
+                <td class="recommended">Included</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Launch</h3>
+        <div class="kv-table">
+          <div class="kv-row">
+            <span class="kv-label">One-off build</span>
+            <span class="kv-value">&pound;1,500</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-label">Monthly plan</span>
+            <span class="kv-value">&pound;79/month</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-label">Timeline</span>
+            <span class="kv-value">2&ndash;3 weeks</span>
+          </div>
+        </div>
+
+        <h3>Launch + Grow <span style="font-size: 14px; font-weight: 500; color: var(--primary); margin-left: 8px;">(Recommended)</span></h3>
+        <div class="kv-table">
+          <div class="kv-row">
+            <span class="kv-label">One-off build</span>
+            <span class="kv-value">&pound;1,500</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-label">Monthly plan</span>
+            <span class="kv-value">&pound;149/month</span>
+          </div>
+          <div class="kv-row">
+            <span class="kv-label">Timeline</span>
+            <span class="kv-value">2&ndash;3 weeks</span>
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>We recommend Launch + Grow.</strong> The difference is &pound;70/month &mdash; less than a single wax removal appointment &mdash; and it gives you double the mini projects, Google Business Profile optimisation, and quarterly reviews where we look at what&rsquo;s working and what we can improve. The biggest return from a new website comes after launch, when small, informed changes compound into significantly more bookings over time.
+        </div>
+
+        <h3>Payment</h3>
+        <p>The build fee is split into two instalments: 50% on kickoff, 50% on launch day. The monthly plan begins once the site goes live. No long-term lock-in &mdash; the monthly plan runs on a rolling basis with 30 days&rsquo; notice.</p>
+      </section>
+      <hr class="prop-hr">
+
+      <!-- ========== SECTION 08 ========== -->
+      <section class="prop-section" id="s08">
+        <span class="section-num">08</span>
+        <h2>Timeline &amp; Next Steps</h2>
+
+        <div class="prop-table-wrap">
+          <table class="prop-table">
+            <thead>
+              <tr>
+                <th>Phase</th>
+                <th>What Happens</th>
+                <th>Duration</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Kickoff</strong></td>
+                <td>We finalise your content, gather logos and photos, and confirm what&rsquo;s needed</td>
+                <td>2&ndash;3 days</td>
+              </tr>
+              <tr>
+                <td><strong>2. Design &amp; Build</strong></td>
+                <td>Full site development based on the approved demo, with your final content</td>
+                <td>10&ndash;14 days</td>
+              </tr>
+              <tr>
+                <td><strong>3. Review</strong></td>
+                <td>You review the site, we make revisions based on your feedback</td>
+                <td>3&ndash;5 days</td>
+              </tr>
+              <tr>
+                <td><strong>4. Launch</strong></td>
+                <td>We switch everything over, archive your old site, and set up visitor tracking</td>
+                <td>1 day</td>
+              </tr>
+              <tr>
+                <td><strong>5. Ongoing</strong></td>
+                <td>Monthly plan begins &mdash; hosting, backups, and your mini projects included</td>
+                <td>Ongoing</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>What We&rsquo;ll Need From You</h3>
+        <p>We keep this as simple as possible. To get started, we just need:</p>
+        <ul>
+          <li>Which package you&rsquo;d prefer (Launch or Launch + Grow)</li>
+          <li>High-resolution clinic and team photos (or we can arrange professional photography)</li>
+          <li>Any content updates or corrections to the demo copy</li>
+          <li>Domain registrar login details (we&rsquo;ll handle the switch for you)</li>
+        </ul>
+
+        <h3>What Happens Next</h3>
+        <p>I&rsquo;ll follow up within a few days to see if you have any questions. If you&rsquo;d like to move forward sooner, the quickest way is to book a 15-minute call so I can walk you through the demo on a screen share &mdash; it&rsquo;s much more impressive in person than in screenshots.</p>
+        <p>Call or text me on <a href="tel:07786556885" style="color: var(--primary); font-weight: 600;">07786 556885</a>, or email <a href="mailto:daniel@dreamfree.co.uk" style="color: var(--primary); font-weight: 600;">daniel@dreamfree.co.uk</a>. I can usually get a call booked within 48 hours.</p>
+      </section>
+
+      <!-- ============ CTA FOOTER BLOCK ============ -->
+      <div class="prop-cta-block">
+        <h2>Let&rsquo;s book a call</h2>
+        <p class="subtitle">15 minutes is all it takes. I&rsquo;ll walk you through the demo and answer any questions.</p>
+        <div class="prop-cta-contacts">
+          <a href="mailto:daniel@dreamfree.co.uk">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            daniel@dreamfree.co.uk
+          </a>
+          <a href="tel:07786556885">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            07786 556885
+          </a>
+        </div>
+        <a href="mailto:daniel@dreamfree.co.uk?subject=Halo%20Hearing%20Solutions%20%E2%80%94%20Let's%20Go!" class="prop-cta-btn">
+          Let&rsquo;s Talk
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ============ SITE FOOTER ============ -->
+  <footer class="prop-footer">
+    <div class="prop-footer-logo">
+      <svg viewBox="0 0 120 20" width="100" height="18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="16" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="15" font-weight="700" fill="currentColor">DreamFree</text>
+      </svg>
+    </div>
+    &copy; 2026 DreamFree. All rights reserved.
+  </footer>
+
+  <!-- ============ JAVASCRIPT ============ -->
+  <script>
+  (function() {
+    'use strict';
+
+    // Header shadow on scroll
+    var header = document.getElementById('propHeader');
+    if (header) {
+      var ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            if (window.scrollY > 10) {
+              header.classList.add('scrolled');
+            } else {
+              header.classList.remove('scrolled');
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+
+    // TOC active tracking
+    var sections = document.querySelectorAll('.prop-section');
+    var tocLinks = document.querySelectorAll('.prop-toc-list a');
+    if (sections.length && tocLinks.length) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var id = entry.target.id;
+            tocLinks.forEach(function(link) {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -60% 0px',
+        threshold: 0
+      });
+      sections.forEach(function(section) { observer.observe(section); });
+    }
+  })();
+  </script>
+</body>
+</html>

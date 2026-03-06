@@ -398,6 +398,10 @@ section.compact {
   text-decoration: none;
 }
 .logo-mark { width: 42px; height: 42px; flex-shrink: 0; }
+.logo-img { height: 40px; width: auto; }
+.header--hero .logo-img { filter: brightness(0) invert(1); }
+.header--hero.scrolled .logo-img { filter: none; }
+.footer-logo-img { height: 48px; width: auto; filter: brightness(0) invert(1); margin-bottom: var(--sp-md); }
 .logo-text {
   font-family: var(--font-body);
   font-weight: 800;
